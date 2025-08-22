@@ -15,6 +15,11 @@ pipeline {
             steps {
                 sh 'yarn test'
             }
+            post {
+                always {
+                    junit '**/reports/**/*.xml' // Wildcard pattern in your project
+                }
+            }
         }
 
         stage('build') {
@@ -26,6 +31,11 @@ pipeline {
         stage('test:e2e') {
             steps {
                 sh 'yarn test:e2e'
+            }
+            post {
+                always {
+                    junit '**/reports/**/*.xml' // Wildcard pattern in your project
+                }
             }
         }
 
