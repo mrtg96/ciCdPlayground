@@ -24,6 +24,9 @@ pipeline {
 
         stage('build') {
             steps {
+                script {
+                    currentBuild.description = "my new description"
+                }
                 sh 'yarn build'
             }
         }
