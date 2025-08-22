@@ -6,14 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "1.0.0"
+        description: "Specify the Tag here"
         required: true
+        type: string
   
 permissions:
   checks: write
   pull-requests: write
   id-token: write
-  contents: read
+  contents: write
   pages: write
 
 jobs:
