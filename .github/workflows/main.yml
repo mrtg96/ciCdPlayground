@@ -7,7 +7,7 @@ on:
     inputs:
       version:
         description: "Specify the Tag here"
-        required: true
+        required: false
         type: string
   
 permissions:
@@ -19,6 +19,7 @@ permissions:
 
 jobs:
   tag:
+    if: ${{ inputs.version != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,6 +28,11 @@ jobs:
       - name: Create and push tag
         run: |
           TAG="v${{ inputs.version }}"
+          git fetch --tags
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "Tag $TAG already exists; skipping."
+            exit 0
+          fi
           git tag "$TAG"
           git push origin "$TAG"
   build:
