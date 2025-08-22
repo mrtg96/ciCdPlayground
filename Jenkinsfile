@@ -17,7 +17,7 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/reports/**/*.xml' // Wildcard pattern in your project
+                    junit stdioRetention: 'ALL', testResults: '**/reports/**/*.xml'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/reports/**/*.xml' // Wildcard pattern in your project
+                    junit stdioRetention: 'ALL', testResults: '**/reports/**/*.xml'
                 }
             }
         }
